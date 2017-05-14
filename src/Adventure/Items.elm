@@ -3,15 +3,34 @@ module Adventure.Items exposing (..)
 import Maybe exposing (..)
 
 
-type alias Item =
-    { name : String
-    , description : String
+type TraitKind
+    = Touchable
+    | Hearable
+    | Smellable
+
+
+type alias Trait =
+    { kind : TraitKind
+    , text : String
     }
 
 
-type alias Touchable item =
-    { item | texture : Just String }
+type alias Item =
+    { name : String
+    , description : String
+    , traits : List Trait
+    }
 
 
-type alias Hearable item =
-    { item | sound : Just String }
+type alias ItemList =
+    List Item
+
+
+isHearable : Trait -> Bool
+isHearable trait =
+    trait.kind == Hearable
+
+
+getText : Trait -> String
+getText trait =
+    trait.text

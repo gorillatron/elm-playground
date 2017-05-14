@@ -10,6 +10,7 @@ dininghall =
     , items =
         [ { name = "Steel Armor"
           , description = "A bit rusty though normal looking armor."
+          , traits = []
           }
         ]
     }

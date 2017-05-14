@@ -1,31 +1,52 @@
-module Playgroun exposing (..)
+module Playground exposing (..)
 
 import Html exposing (..)
 
 
 type alias Human =
-    { name : String
-    , power : Int
+    { power : Int }
+
+
+type alias SuperPowered a =
+    { a | superpower : Int }
+
+
+type alias SuperHuman =
+    SuperPowered Human
+
+
+superpower : Human -> Int -> SuperHuman
+superpower human superpower =
+    { power = human.power
+    , superpower = superpower
     }
 
 
-superpower : Human -> Int -> Human
-superpower human extrapower =
-    { human
-        | power = human.power + extrapower
-    }
+jorn : Human
+jorn =
+    { power = 10 }
 
 
-ole : Human
-ole =
-    { name = "Ole"
-    , power = 10
-    }
+superjorn : SuperHuman
+superjorn =
+    superpower jorn 20
 
 
-superole =
-    superpower ole 10
+classofbeing : Human -> String
+classofbeing human =
+    case human of
+        SuperPowered human ->
+            human.name ++ " is superpowered"
+
+        Human ->
+            human.name ++ " is a normal human being"
+
+        _ ->
+            human.name ++ " is unclassified"
 
 
 main =
-    text <| superole.name ++ " power: " ++ (toString superole.power)
+    div []
+        [ text (toString jorn)
+        , text (toString superjorn)
+        ]
