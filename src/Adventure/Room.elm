@@ -6,5 +6,5 @@ import Adventure.Items exposing (..)
 type alias Room =
     { name : String
     , description : String
-    , items : ItemList
+    , items : List Item
     }
